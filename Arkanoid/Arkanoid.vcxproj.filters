@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Arkanoid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Arkanoid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SafeWall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Arkanoid.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Arkanoid.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\01-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\02-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\03-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\04-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\05-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\06-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\07-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\08-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\09-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\10-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\11-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\12-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\13-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\14-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\15-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\16-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\17-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\18-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\19-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\20-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\21-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\22-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\23-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\24-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\25-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\26-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\27-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\28-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\29-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\30-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\31-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\32-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\33-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\34-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\35-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\36-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\37-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\38-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\39-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\40-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\41-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\42-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\43-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\44-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\45-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\46-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\47-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\48-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\49-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\50-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\51-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\52-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\53-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\54-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\55-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\56-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\57-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\58-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\59-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\60-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\61-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\62-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\63-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\64-Breakout-Tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

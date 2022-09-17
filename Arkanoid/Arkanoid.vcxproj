@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{071a9844-920d-4f3a-b2a2-79e7ec70ebb8}</ProjectGuid>
+    <RootNamespace>Arkanoid</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Arkanoid.h" />
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Engine.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Platform.h" />
+    <ClInclude Include="SafeWall.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Arkanoid.cpp" />
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="SafeWall.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Arkanoid.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Arkanoid.ico" />
+    <Image Include="data\01-Breakout-Tiles.png" />
+    <Image Include="data\02-Breakout-Tiles.png" />
+    <Image Include="data\03-Breakout-Tiles.png" />
+    <Image Include="data\04-Breakout-Tiles.png" />
+    <Image Include="data\05-Breakout-Tiles.png" />
+    <Image Include="data\06-Breakout-Tiles.png" />
+    <Image Include="data\07-Breakout-Tiles.png" />
+    <Image Include="data\08-Breakout-Tiles.png" />
+    <Image Include="data\09-Breakout-Tiles.png" />
+    <Image Include="data\10-Breakout-Tiles.png" />
+    <Image Include="data\11-Breakout-Tiles.png" />
+    <Image Include="data\12-Breakout-Tiles.png" />
+    <Image Include="data\13-Breakout-Tiles.png" />
+    <Image Include="data\14-Breakout-Tiles.png" />
+    <Image Include="data\15-Breakout-Tiles.png" />
+    <Image Include="data\16-Breakout-Tiles.png" />
+    <Image Include="data\17-Breakout-Tiles.png" />
+    <Image Include="data\18-Breakout-Tiles.png" />
+    <Image Include="data\19-Breakout-Tiles.png" />
+    <Image Include="data\20-Breakout-Tiles.png" />
+    <Image Include="data\21-Breakout-Tiles.png" />
+    <Image Include="data\22-Breakout-Tiles.png" />
+    <Image Include="data\23-Breakout-Tiles.png" />
+    <Image Include="data\24-Breakout-Tiles.png" />
+    <Image Include="data\25-Breakout-Tiles.png" />
+    <Image Include="data\26-Breakout-Tiles.png" />
+    <Image Include="data\27-Breakout-Tiles.png" />
+    <Image Include="data\28-Breakout-Tiles.png" />
+    <Image Include="data\29-Breakout-Tiles.png" />
+    <Image Include="data\30-Breakout-Tiles.png" />
+    <Image Include="data\31-Breakout-Tiles.png" />
+    <Image Include="data\32-Breakout-Tiles.png" />
+    <Image Include="data\33-Breakout-Tiles.png" />
+    <Image Include="data\34-Breakout-Tiles.png" />
+    <Image Include="data\35-Breakout-Tiles.png" />
+    <Image Include="data\36-Breakout-Tiles.png" />
+    <Image Include="data\37-Breakout-Tiles.png" />
+    <Image Include="data\38-Breakout-Tiles.png" />
+    <Image Include="data\39-Breakout-Tiles.png" />
+    <Image Include="data\40-Breakout-Tiles.png" />
+    <Image Include="data\41-Breakout-Tiles.png" />
+    <Image Include="data\42-Breakout-Tiles.png" />
+    <Image Include="data\43-Breakout-Tiles.png" />
+    <Image Include="data\44-Breakout-Tiles.png" />
+    <Image Include="data\45-Breakout-Tiles.png" />
+    <Image Include="data\46-Breakout-Tiles.png" />
+    <Image Include="data\47-Breakout-Tiles.png" />
+    <Image Include="data\48-Breakout-Tiles.png" />
+    <Image Include="data\49-Breakout-Tiles.png" />
+    <Image Include="data\50-Breakout-Tiles.png" />
+    <Image Include="data\51-Breakout-Tiles.png" />
+    <Image Include="data\52-Breakout-Tiles.png" />
+    <Image Include="data\53-Breakout-Tiles.png" />
+    <Image Include="data\54-Breakout-Tiles.png" />
+    <Image Include="data\55-Breakout-Tiles.png" />
+    <Image Include="data\56-Breakout-Tiles.png" />
+    <Image Include="data\57-Breakout-Tiles.png" />
+    <Image Include="data\58-Breakout-Tiles.png" />
+    <Image Include="data\59-Breakout-Tiles.png" />
+    <Image Include="data\60-Breakout-Tiles.png" />
+    <Image Include="data\61-Breakout-Tiles.png" />
+    <Image Include="data\62-Breakout-Tiles.png" />
+    <Image Include="data\63-Breakout-Tiles.png" />
+    <Image Include="data\64-Breakout-Tiles.png" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
