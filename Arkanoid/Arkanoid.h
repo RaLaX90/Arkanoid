@@ -8,6 +8,7 @@
 #pragma comment(lib, "windowscodecs.lib")
 #pragma comment(lib, "d2d1")
 #pragma comment(lib, "dwrite")
+#pragma comment(lib, "FrameworkRelease_x64.lib")
 
 #ifndef Assert
 #if defined( DEBUG ) || defined( _DEBUG )
@@ -23,22 +24,46 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 #endif
 
 
-class MainApp
+class MainApp : public Framework
 {
 private:
-    HWND m_hwnd = NULL;
 
-    Engine* engine = nullptr;
+	ID2D1Factory* m_pDirect2dFactory = nullptr;
+	ID2D1HwndRenderTarget* m_pRenderTarget = nullptr;
+	HWND m_hwnd = NULL;
 
-    // The windows procedure.
-    static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	Engine* engine = nullptr;
+
+	int screenWidth = 0;
+	int screenHeight = 0;
+	bool isFullScreen = false;
+
+	inline static long prevMousePosX = 0, prevMousePosY = 0;
+	// The windows procedure.
+	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 public:
-    MainApp();
-    ~MainApp();
+	MainApp();
+	~MainApp();
 
-    HRESULT Initialize();
+	void PreInit(int& width, int& height, bool& fullscreen) override;
 
-    // Process and dispatch messages
-    void RunMessageLoop();
+	bool Init() override;
+
+	void Close() override;
+
+	bool Tick() override;
+
+	void onMouseMove(int x, int y, int xrelative, int yrelative) override;
+
+	void onMouseButtonClick(FRMouseButton button, bool isReleased) override;
+
+	void onKeyPressed(FRKey k) override;
+
+	void onKeyReleased(FRKey k) override;
+
+	const char* GetTitle() override;
+
+	// Process and dispatch messages
+	void RunMessageLoop();
 };

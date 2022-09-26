@@ -13,7 +13,8 @@ Block::~Block()
 	SafeRelease(&m_pYellowBrush);
 }
 
-void Block::Reset() {
+void Block::Reset()
+{
 
 }
 

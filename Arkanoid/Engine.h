@@ -12,16 +12,16 @@
 #include "Block.h"
 #include "SafeWall.h"
 
-class Engine : public Framework
+class Engine /*: public Framework*/
 {
 private:
-	ID2D1Factory* m_pDirect2dFactory = nullptr;
+	//ID2D1Factory* m_pDirect2dFactory = nullptr;
 	ID2D1HwndRenderTarget* m_pRenderTarget = nullptr;
 
 	Ball* ball = nullptr;
 	Platform* platform = nullptr;
 	std::vector<Block*> blocks{ 75, nullptr };
-	SafeWall* safeWall = nullptr;
+	//SafeWall* safeWall = nullptr;
 
 	int mouseXPos = 0;
 	int mouseYPos = 0;
@@ -30,8 +30,7 @@ private:
 
 	bool win = false;
 
-	bool leftPressed = false;
-	bool rightPressed = false;
+	std::chrono::steady_clock::time_point time_after_initialization;
 
 	std::chrono::steady_clock::time_point begin;
 	std::chrono::steady_clock::time_point end;
@@ -57,29 +56,19 @@ public:
 	Engine();
 	~Engine();
 
-	HRESULT InitializeD2D(HWND m_hwnd);
+	FRKey platformMovementSide = FRKey::COUNT;
+
+	HRESULT InitializeD2D(HWND m_hwnd, ID2D1HwndRenderTarget* renderTarget);
 	void ResetAll();
 	void Logic(double elapsedTime);
 	HRESULT DrawAll();
 
+	void SetMousePosition(int mouse_X, int mouse_Y);
+	int GetMousePositionX();
+	int GetMousePositionY();
 
-	void PreInit(int& width, int& height, bool& fullscreen) override;
-
-	bool Init() override;
-
-	void Close() override;
-
-	bool Tick() override;
-
-	void onMouseMove(int x, int y, int xrelative, int yrelative) override;
-
-	void onMouseButtonClick(FRMouseButton button, bool isReleased) override;
-
-	void onKeyPressed(FRKey k) override;
-
-	void onKeyReleased(FRKey k) override;
-
-	const char* GetTitle() override;
+	void SetSideButtonPressed(FRKey side);
+	FRKey GetSideButtonPressed();
 
 
 	Sprite* createSprite(const char* path);

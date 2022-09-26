@@ -29,6 +29,26 @@ Point2D Sprite::GetPosition()
 	return position;
 }
 
+void Sprite::SetWidth(int w)
+{
+	width = w;
+}
+
+int Sprite::GetWidth()
+{
+	return width;
+}
+
+void Sprite::SetHeight(int h)
+{
+	height = h;
+}
+
+int Sprite::GetHeight()
+{
+	return height;
+}
+
 ID2D1Bitmap* Sprite::setBackgroundImage(ID2D1HwndRenderTarget* m_pRenderTarget, LPCWSTR imageFile)
 {
 	IWICBitmapDecoder* pDecoder = NULL;

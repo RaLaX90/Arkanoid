@@ -2,12 +2,17 @@
 
 Engine::Engine()
 {
+	//Sprite* qwe = createSprite("data/01-Breakout-Tiles.png");
 	// Initializes everything in the game: ball, platform, positions
 
 	platform = new Platform();
-	ball = new Ball(platform);
+	//platform = (Platform*)createSprite("data/50-Breakout-Tiles.png");
 
-	safeWall = new SafeWall();
+	ball = new Ball(platform);
+	//ball = (Ball*)createSprite("data/50-Breakout-Tiles.png");
+
+	//safeWall = new SafeWall();
+	//safeWall = (SafeWall*)createSprite("data/61-Breakout-Tiles.png");
 
 	m_generator = std::mt19937(m_rd());
 	m_distribution_color = std::uniform_int_distribution<int>(0, 9);
@@ -34,38 +39,37 @@ Engine::~Engine()
 	SafeRelease(&m_pTextFormat);
 	SafeRelease(&m_pDWriteFactory);
 
-	SafeRelease(&m_pRenderTarget);
-	SafeRelease(&m_pDirect2dFactory);
-
-
 	for (auto& block : blocks) {
 		delete block;
 	}
 	blocks.clear();
 	blocks.shrink_to_fit();
 
-	delete safeWall;
+	//delete safeWall;
 	delete ball;
 	delete platform;
 }
 
-HRESULT Engine::InitializeD2D(HWND m_hwnd)
+HRESULT Engine::InitializeD2D(HWND m_hwnd, ID2D1HwndRenderTarget* renderTarget)
 {
+	m_pRenderTarget = renderTarget;
 	// Initializes Direct2D, to draw with
-	D2D1_SIZE_U size = D2D1::SizeU(RESOLUTION_X, RESOLUTION_Y);
-	D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_pDirect2dFactory);
+	//D2D1_SIZE_U size = D2D1::SizeU(RESOLUTION_X, RESOLUTION_Y);
+	//D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_pDirect2dFactory);
 
-	m_pDirect2dFactory->CreateHwndRenderTarget(
-		D2D1::RenderTargetProperties(),
-		D2D1::HwndRenderTargetProperties(m_hwnd, size, D2D1_PRESENT_OPTIONS_IMMEDIATELY),
-		&m_pRenderTarget
-	);
+	//m_pDirect2dFactory->CreateHwndRenderTarget(
+	//	D2D1::RenderTargetProperties(),
+	//	D2D1::HwndRenderTargetProperties(m_hwnd, size, D2D1_PRESENT_OPTIONS_IMMEDIATELY),
+	//	&m_pRenderTarget
+	//);
+
+	//time_after_initialization = std::chrono::steady_clock::now();
 
 	ball->Initialize(m_pRenderTarget);
 
 	platform->Initialize(m_pRenderTarget);
 
-	safeWall->Initialize(m_pRenderTarget);
+	//safeWall->Initialize(m_pRenderTarget);
 
 	for (const auto& block : blocks) {
 		block->Initialize(m_pRenderTarget);
@@ -100,11 +104,8 @@ void Engine::Logic(double elapsedTime)
 	// It uses this value for a smooth and consistent movement, regardless of the CPU or graphics speed
 	if (playing)
 	{
-		if (leftPressed) {
-			platform->Move(FRKey::LEFT, elapsedTime);
-		}
-		if (rightPressed) {
-			platform->Move(FRKey::RIGHT, elapsedTime);
+		if (platformMovementSide == FRKey::LEFT || platformMovementSide == FRKey::RIGHT) {
+			platform->Move(platformMovementSide, elapsedTime);
 		}
 
 		// Moves the ball forward
@@ -200,6 +201,32 @@ HRESULT Engine::DrawAll()
 	return S_OK;
 }
 
+void Engine::SetMousePosition(int mouse_X, int mouse_Y)
+{
+	mouseXPos = mouse_X;
+	mouseYPos = mouse_Y;
+}
+
+int Engine::GetMousePositionX()
+{
+	return mouseXPos;
+}
+
+int Engine::GetMousePositionY()
+{
+	return mouseYPos;
+}
+
+void Engine::SetSideButtonPressed(FRKey side)
+{
+	platformMovementSide = side;
+}
+
+FRKey Engine::GetSideButtonPressed()
+{
+	return platformMovementSide;
+}
+
 void Engine::setBlocksTransparent(bool mode) {
 	for (const auto& block : blocks) {
 		if (block->GetColor() == Block::colorsSelect::Yellow) {
@@ -259,60 +286,53 @@ bool Engine::isAllBlocksDestroyed()
 	return isAllBlocksDestroyed;
 }
 
+Sprite* Engine::createSprite(const char* path)
+{
+	Sprite* obj = new Sprite();
+	obj->m_bitmap = Sprite::setBackgroundImage(m_pRenderTarget, (LPCWSTR)path);
+	return obj;
+}
 
-void Engine::PreInit(int& width, int& height, bool& fullscreen)
+void Engine::drawSprite(Sprite* s, int x, int y)
+{
+	s->Draw(m_pRenderTarget);
+}
+
+void Engine::getSpriteSize(Sprite* s, int& w, int& h)
+{
+	w = s->GetWidth();
+	h = s->GetHeight();
+}
+
+void Engine::setSpriteSize(Sprite* s, int w, int h)
+{
+	s->SetWidth(w);
+	s->SetHeight(h);
+}
+
+void Engine::destroySprite(Sprite* s)
+{
+	s->~Sprite();
+	//s = nullptr;
+}
+
+void Engine::drawTestBackground()
 {
 }
 
-bool Engine::Init()
+void Engine::getScreenSize(int& w, int& h)
 {
-	return false;
+	w = RESOLUTION_X;
+	h = RESOLUTION_Y;
 }
 
-void Engine::Close()
+unsigned int Engine::getTickCount()
 {
+	return std::chrono::duration_cast<std::chrono::milliseconds>(
+		std::chrono::steady_clock::now() - time_after_initialization
+		).count();
 }
 
-bool Engine::Tick()
-{
-	return false;
-}
-
-void Engine::onMouseMove(int x, int y, int xrelative, int yrelative)
-{
-	mouseXPos = x;
-	mouseYPos = y;
-}
-
-void Engine::onMouseButtonClick(FRMouseButton button, bool isReleased)
-{
-}
-
-void Engine::onKeyPressed(FRKey k)
-{
-	if (k == FRKey::LEFT) {
-		leftPressed = true;
-	}
-	if (k == FRKey::RIGHT) {
-		rightPressed = true;
-	}
-}
-
-void Engine::onKeyReleased(FRKey k)
-{
-	if (k == FRKey::LEFT) {
-		leftPressed = false;
-	}
-	if (k == FRKey::RIGHT) {
-		rightPressed = false;
-	}
-}
-
-const char* Engine::GetTitle()
-{
-	return "Arkanoid";
-}
-
-void showCursor(bool bShow) {
+void Engine::showCursor(bool bShow) {
 	ShowCursor(bShow);
 }

@@ -13,7 +13,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	{
 		MainApp app;
 
-		if (SUCCEEDED(app.Initialize()))
+		if (SUCCEEDED(app.Init()))
 		{
 			app.RunMessageLoop();
 		}
@@ -34,12 +34,20 @@ MainApp::MainApp()
 MainApp::~MainApp()
 {
 	delete engine;
+
+	SafeRelease(&m_pRenderTarget);
+	SafeRelease(&m_pDirect2dFactory);
 }
 
-HRESULT MainApp::Initialize()
+void MainApp::PreInit(int& width, int& height, bool& fullscreen)
 {
-	HRESULT hr = S_OK;
+	width = screenWidth;
+	height = screenHeight;
+	fullscreen = isFullScreen;
+}
 
+bool MainApp::Init()
+{
 	// Register the window class.
 	WNDCLASSEX wcex = { sizeof(WNDCLASSEX) };
 	wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -58,7 +66,7 @@ HRESULT MainApp::Initialize()
 	m_hwnd = CreateWindowEx(
 		NULL,
 		L"D2DMainApp",
-		L"Game",
+		(LPCWSTR)GetTitle(),
 		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
@@ -69,21 +77,74 @@ HRESULT MainApp::Initialize()
 		HINST_THISCOMPONENT,
 		this
 	);
-	hr = m_hwnd ? S_OK : E_FAIL;
+
+	// Initializes Direct2D, to draw with
+	D2D1_SIZE_U size = D2D1::SizeU(RESOLUTION_X, RESOLUTION_Y);
+	D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_pDirect2dFactory);
+
+	m_pDirect2dFactory->CreateHwndRenderTarget(
+		D2D1::RenderTargetProperties(),
+		D2D1::HwndRenderTargetProperties(m_hwnd, size, D2D1_PRESENT_OPTIONS_IMMEDIATELY),
+		&m_pRenderTarget
+	);
+
+	HRESULT hr = m_hwnd ? S_OK : E_FAIL;
 	if (SUCCEEDED(hr))
 	{
-		engine->InitializeD2D(m_hwnd);
+		engine->InitializeD2D(m_hwnd, m_pRenderTarget);
 
 		ShowWindow(m_hwnd, SW_SHOWNORMAL);
 		UpdateWindow(m_hwnd);
 	}
 
-	return hr;
+	return true;
+}
+
+void MainApp::Close()
+{
+
+}
+
+bool MainApp::Tick()
+{
+	return false;
+}
+
+void MainApp::onMouseMove(int x, int y, int xrelative, int yrelative)
+{
+	engine->SetMousePosition(x, y);
+}
+
+void MainApp::onMouseButtonClick(FRMouseButton button, bool isReleased)
+{
+	if (button == FRMouseButton::LEFT) {
+		engine->ResetAll();
+	}
+}
+
+void MainApp::onKeyPressed(FRKey k)
+{
+	if (k == FRKey::LEFT || k == FRKey::RIGHT) {
+		engine->SetSideButtonPressed(k);
+	}
+}
+
+void MainApp::onKeyReleased(FRKey k)
+{
+	if (((k == FRKey::LEFT) && (engine->GetSideButtonPressed() == FRKey::LEFT)) ||
+		((k == FRKey::RIGHT) && (engine->GetSideButtonPressed() == FRKey::RIGHT))) {
+		engine->SetSideButtonPressed(FRKey::COUNT);
+	}
+}
+
+const char* MainApp::GetTitle()
+{
+	return "Arkanoid";
 }
 
 void MainApp::RunMessageLoop()
 {
-	MSG msg;
+	MSG msg{};
 
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -91,11 +152,12 @@ void MainApp::RunMessageLoop()
 	double framesTime = 0;
 
 	boolean running = true;
+	double elapsed_secs;
 	while (running)
 	{
 
 		end = std::chrono::steady_clock::now();
-		double elapsed_secs = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() / 1000000.0;
+		elapsed_secs = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() / 1000000.0;
 		begin = end;
 
 		// Display FPS
@@ -114,8 +176,9 @@ void MainApp::RunMessageLoop()
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-			if (msg.message == WM_QUIT || (msg.message == WM_CHAR && msg.wParam == VK_ESCAPE))
+			if (msg.message == WM_QUIT || (msg.message == WM_CHAR && msg.wParam == VK_ESCAPE)) {
 				running = false;
+			}
 		}
 
 		// Game logic
@@ -157,39 +220,54 @@ LRESULT CALLBACK MainApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 		{
 			switch (message)
 			{
-
 			case WM_MOUSEMOVE:
 			{
-				pMainApp->engine->onMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), GET_X_LPARAM(lParam) - 0, GET_Y_LPARAM(lParam) - 0);
+				POINT lpPoint;
+				GetCursorPos(&lpPoint);
+				ScreenToClient(hwnd, &lpPoint);
+				pMainApp->onMouseMove(lpPoint.x, lpPoint.y, lpPoint.x - prevMousePosX, lpPoint.y - prevMousePosY);
+
+				prevMousePosX = lpPoint.x;
+				prevMousePosY = lpPoint.y;
+
 				result = 0;
 				wasHandled = true;
 				break;
 			}
 			case WM_LBUTTONUP:
 			{
-				//pMainApp->engine->MousePos(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
-				pMainApp->engine->ResetAll();
+				pMainApp->onMouseButtonClick(FRMouseButton::LEFT, true);
 				result = 0;
 				wasHandled = true;
 				break;
 			}
 			case WM_KEYDOWN:
 			{
-				pMainApp->engine->onKeyPressed(wParam == VK_LEFT ? FRKey::LEFT : FRKey::RIGHT);
+				if (wParam == VK_LEFT) {
+					pMainApp->onKeyPressed(FRKey::LEFT);
+				}
+				else if (wParam == VK_RIGHT) {
+					pMainApp->onKeyPressed(FRKey::RIGHT);
+				}
 				result = 0;
 				wasHandled = true;
 				break;
 			}
 			case WM_KEYUP:
 			{
-				pMainApp->engine->onKeyReleased(wParam == VK_LEFT ? FRKey::LEFT : FRKey::RIGHT);
+				if (wParam == VK_LEFT) {
+					pMainApp->onKeyReleased(FRKey::LEFT);
+				}
+				else if (wParam == VK_RIGHT) {
+					pMainApp->onKeyReleased(FRKey::RIGHT);
+				}
 				result = 0;
 				wasHandled = true;
 				break;
 			}
 			//case WM_SETCURSOR: {
 			//	SetCursor(NULL);
-			//	pMainApp->engine->showCursor(false);
+			//	pMainApp->showCursor(false);
 			//	result = 0;
 			//	wasHandled = true;
 			//	break;
@@ -199,6 +277,10 @@ LRESULT CALLBACK MainApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 				InvalidateRect(hwnd, NULL, FALSE);
 				result = 0;
 				wasHandled = true;
+				break;
+			}
+			case WM_CLOSE: {
+				DestroyWindow(hwnd);
 				break;
 			}
 			case WM_DESTROY:

@@ -17,7 +17,7 @@
 class Sprite;
 
 FRAMEWORK_API Sprite* createSprite(const char* path);
-FRAMEWORK_API void drawSprite(Sprite*, int x, int y);  // Missing first function paramenter
+FRAMEWORK_API void drawSprite(Sprite*, int x, int y);
 
 FRAMEWORK_API void getSpriteSize(Sprite* s, int& w, int &h);
 FRAMEWORK_API void setSpriteSize(Sprite* s, int w, int h);
@@ -30,10 +30,10 @@ FRAMEWORK_API void getScreenSize(int& w, int &h);
 // Get the number of milliseconds since library initialization.
 FRAMEWORK_API unsigned int getTickCount();
 
-FRAMEWORK_API void showCursor(bool bShow); // parameter name error (I think)
+FRAMEWORK_API void showCursor(bool bShow);
 
 enum class FRKey {
-	RIGHT,  // no serial number for the first element, for example "RIGHT = 0"
+	RIGHT,
 	LEFT,
 	DOWN,
 	UP,
@@ -41,7 +41,7 @@ enum class FRKey {
 };
 
 enum class FRMouseButton {
-	LEFT,  // no serial number for the first element, for example "LEFT = 0"
+	LEFT,
 	MIDDLE,
 	RIGHT,
 	COUNT
