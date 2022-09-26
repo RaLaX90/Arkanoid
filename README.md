@@ -1,1 +1,1 @@
-# Arkanoid
+# Arkanoid | Breakout game
