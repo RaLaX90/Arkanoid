@@ -19,12 +19,12 @@ public:
 		Brown
 	};
 
-	Block(float xPos, float yPos, colorsSelect color);
+	Block() = default;
 	~Block();
 
 	void Reset() override;
 	void Reset(colorsSelect color);
-	void Initialize(ID2D1HwndRenderTarget* m_pRenderTarget) override;
+	void Initialize(ID2D1HwndRenderTarget* m_pRenderTarget, colorsSelect color);
 	void Draw(ID2D1HwndRenderTarget* m_pRenderTarget) override;
 
 	uint8_t GetHealth();
@@ -33,12 +33,14 @@ public:
 
 	void SetTransparentMode(bool mode);
 	bool GetTransparentMode();
+
+	//static const char* GetTexturePathFromColor(colorsSelect _color);
 private:
 	colorsSelect m_color;
 
 	ID2D1SolidColorBrush* m_pYellowBrush = nullptr;
 
-	uint8_t health = 0;
+	uint8_t m_health = 0;
 
 	bool m_transparentMode = false;
 };

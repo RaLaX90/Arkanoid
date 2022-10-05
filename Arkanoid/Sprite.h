@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Settings.h"
+#include "Framework.h"
 
 struct Point2D
 {
@@ -11,29 +12,23 @@ struct Point2D
 class Sprite
 {
 protected:
-
-
-
-
-
-public:
-
-	Point2D position{ 0, 0 };
-	Point2D direction{ 0, 0 };
+	Point2D m_position{ 0, 0 };
+	Point2D m_direction{ 0, 0 };
 	float m_speed = 0;
-	int width, height;
+	int m_width = 0, m_height = 0;
 	ID2D1Bitmap* m_bitmap = nullptr;
 
-	static ID2D1Bitmap* setBackgroundImage(ID2D1HwndRenderTarget* m_pRenderTarget, LPCWSTR imageFile);
+public:
+	Sprite() = default;
+	virtual ~Sprite();
 
-	Sprite();
-	~Sprite();
-
-	virtual void Reset();
+	virtual void Reset() = 0;
 	virtual void Initialize(ID2D1HwndRenderTarget* m_pRenderTarget);
-	//virtual void Move(int mouseX, int mouseY, double elapsedTime) = 0;
-	virtual void Draw(ID2D1HwndRenderTarget* m_pRenderTarget);
+	virtual void Draw(ID2D1HwndRenderTarget* m_pRenderTarget) = 0;
 
+	bool setTexture(ID2D1HwndRenderTarget* m_pRenderTarget, LPCWSTR imageFile);
+
+	void SetPosition(int _x, int _y);
 	Point2D GetPosition();
 
 	void SetWidth(int w);

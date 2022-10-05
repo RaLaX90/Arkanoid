@@ -4,12 +4,8 @@
 
 class SafeWall : public Sprite
 {
-private:
-
-	ID2D1SolidColorBrush* m_pYellowBrush = nullptr;
-
 public:
-	SafeWall();
+	SafeWall() = default;
 	~SafeWall();
 
 	void Reset() override;

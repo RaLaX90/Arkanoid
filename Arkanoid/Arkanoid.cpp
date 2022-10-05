@@ -24,12 +24,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 	return 0;
 }
 
-
 MainApp::MainApp()
 {
 	engine = new Engine();
-}
 
+	screenWidth = RESOLUTION_X;
+	screenHeight = RESOLUTION_Y;
+}
 
 MainApp::~MainApp()
 {
@@ -39,10 +40,10 @@ MainApp::~MainApp()
 	SafeRelease(&m_pDirect2dFactory);
 }
 
-void MainApp::PreInit(int& width, int& height, bool& fullscreen)
+void MainApp::PreInit(int& m_width, int& m_height, bool& fullscreen)
 {
-	width = screenWidth;
-	height = screenHeight;
+	m_width = screenWidth;
+	m_height = screenHeight;
 	fullscreen = isFullScreen;
 }
 
@@ -91,13 +92,13 @@ bool MainApp::Init()
 	HRESULT hr = m_hwnd ? S_OK : E_FAIL;
 	if (SUCCEEDED(hr))
 	{
-		engine->InitializeD2D(m_hwnd, m_pRenderTarget);
+		engine->InitializeD2D(m_pRenderTarget);
 
 		ShowWindow(m_hwnd, SW_SHOWNORMAL);
 		UpdateWindow(m_hwnd);
 	}
 
-	return true;
+	return SUCCEEDED(hr);
 }
 
 void MainApp::Close()
@@ -155,7 +156,6 @@ void MainApp::RunMessageLoop()
 	double elapsed_secs;
 	while (running)
 	{
-
 		end = std::chrono::steady_clock::now();
 		elapsed_secs = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() / 1000000.0;
 		begin = end;
@@ -225,10 +225,10 @@ LRESULT CALLBACK MainApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 				POINT lpPoint;
 				GetCursorPos(&lpPoint);
 				ScreenToClient(hwnd, &lpPoint);
-				pMainApp->onMouseMove(lpPoint.x, lpPoint.y, lpPoint.x - prevMousePosX, lpPoint.y - prevMousePosY);
+				pMainApp->onMouseMove(lpPoint.x, lpPoint.y, lpPoint.x - m_sPrevMousePosX, lpPoint.y - m_sPrevMousePosY);
 
-				prevMousePosX = lpPoint.x;
-				prevMousePosY = lpPoint.y;
+				m_sPrevMousePosX = lpPoint.x;
+				m_sPrevMousePosY = lpPoint.y;
 
 				result = 0;
 				wasHandled = true;
@@ -267,7 +267,7 @@ LRESULT CALLBACK MainApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
 			}
 			//case WM_SETCURSOR: {
 			//	SetCursor(NULL);
-			//	pMainApp->showCursor(false);
+			//	engine->showCursor(false);
 			//	result = 0;
 			//	wasHandled = true;
 			//	break;

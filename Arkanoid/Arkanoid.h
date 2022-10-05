@@ -2,13 +2,13 @@
 
 #include "resource.h"
 #include "Settings.h"
+#include "Framework.h"
 #include "Sprite.h"
 #include "Engine.h"
 
 #pragma comment(lib, "windowscodecs.lib")
 #pragma comment(lib, "d2d1")
 #pragma comment(lib, "dwrite")
-#pragma comment(lib, "FrameworkRelease_x64.lib")
 
 #ifndef Assert
 #if defined( DEBUG ) || defined( _DEBUG )
@@ -23,11 +23,9 @@ EXTERN_C IMAGE_DOS_HEADER __ImageBase;
 #define HINST_THISCOMPONENT ((HINSTANCE)&__ImageBase)
 #endif
 
-
 class MainApp : public Framework
 {
 private:
-
 	ID2D1Factory* m_pDirect2dFactory = nullptr;
 	ID2D1HwndRenderTarget* m_pRenderTarget = nullptr;
 	HWND m_hwnd = NULL;
@@ -38,7 +36,7 @@ private:
 	int screenHeight = 0;
 	bool isFullScreen = false;
 
-	inline static long prevMousePosX = 0, prevMousePosY = 0;
+	inline static long m_sPrevMousePosX = 0, m_sPrevMousePosY = 0;
 	// The windows procedure.
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -46,7 +44,7 @@ public:
 	MainApp();
 	~MainApp();
 
-	void PreInit(int& width, int& height, bool& fullscreen) override;
+	void PreInit(int& m_width, int& m_height, bool& fullscreen) override;
 
 	bool Init() override;
 

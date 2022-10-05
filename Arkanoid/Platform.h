@@ -1,15 +1,11 @@
 #pragma once
 
-#include "Framework.h"
 #include "Sprite.h"
 
 class Platform : public Sprite
 {
-private:
-	ID2D1SolidColorBrush* m_pBlueBrush = nullptr;
-
 public:
-	Platform();
+	Platform() = default;
 	~Platform();
 
 	void Reset() override;

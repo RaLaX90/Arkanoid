@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Sprite.h"
+//#include "Sprite.h"
 #include "Platform.h"
 #include "Block.h"
 
@@ -26,11 +26,11 @@ public:
 		BorderTouchBottom
 	};
 
-	Ball(Platform* platform);
+	Ball() = default;
 	~Ball();
 
 	void Reset() override;
-	void Initialize(ID2D1HwndRenderTarget* m_pRenderTarget) override;
+	void Initialize(ID2D1HwndRenderTarget* m_pRenderTarget, Platform* platform);
 	void Draw(ID2D1HwndRenderTarget* m_pRenderTarget) override;
 
 	void Move(int mouseX, int mouseY, double elapsedTime);
@@ -45,9 +45,7 @@ public:
 	void ManageColission(collisionTypes collisionType);
 
 private:
-	ID2D1SolidColorBrush* m_pRedBrush = nullptr;
-
-	Platform* m_platform = nullptr;
+	Platform* platform = nullptr;
 
 	float m_minSpeed = 0, m_maxSpeed = 0;
 
